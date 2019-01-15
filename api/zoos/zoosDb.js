@@ -5,7 +5,8 @@ module.exports = {
     let query = db("zoos");
 
     if (id) {
-      return query.where("id", id).first();
+      const zoo = query.where('id', id).first();
+      return zoo;
     }
 
     return query;
