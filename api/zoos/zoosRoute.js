@@ -1,6 +1,7 @@
 const express = require("express");
 
 const zoosDb = require("./zoosDb");
+const checkName = require("../common/checkName");
 
 const router = express.Router();
 
@@ -14,7 +15,7 @@ router
       next({ code: 500 });
     }
   })
-  .post("/", async (req, res, next) => {
+  .post("/", checkName, async (req, res, next) => {
     const { name } = req.body;
     try {
       const id = await zoosDb.insert({ name });
