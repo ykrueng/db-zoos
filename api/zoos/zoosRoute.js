@@ -10,8 +10,17 @@ router
       const zoo = await zoosDb.get(Number(id));
       req.zoo = zoo;
       next();
-    } catch(err) {
-      next({ code: 500 })
+    } catch (err) {
+      next({ code: 500 });
+    }
+  })
+  .post("/", async (req, res, next) => {
+    const { name } = req.body;
+    try {
+      const id = await zoosDb.insert({ name });
+      res.status(201).json({ id: id[0] });
+    } catch (err) {
+      next({ code: 500 });
     }
   })
   .get("/", async (req, res, next) => {

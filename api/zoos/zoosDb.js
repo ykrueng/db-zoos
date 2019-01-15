@@ -2,7 +2,7 @@ const db = require("../../data/dbConfig");
 
 module.exports = {
   get: function(id) {
-    let query = db("zoos");
+    let query = db('zoos');
 
     if (id) {
       const zoo = query.where('id', id).first();
@@ -10,5 +10,9 @@ module.exports = {
     }
 
     return query;
+  },
+
+  insert: function (zoo) {
+    return db('zoos').insert(zoo);
   }
 };
