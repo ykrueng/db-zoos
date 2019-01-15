@@ -39,6 +39,20 @@ router
   .get("/:id", (req, res, next) => {
     res.status(200).json(req.zoo);
   })
+  .put("/:id", checkName, async(req, res, next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+    try {
+      const count = await zoosDb.update(id, { name });
+      if (count === 1) {
+        res.sendStatus(204);
+      } else {
+        next({ code: 500 });
+      }
+    } catch (err) {
+      next({ code: 500 });
+    }
+  })
   .delete("/:id", async (req, res, next) => {
     try {
       const count = await zoosDb.remove(Number(req.params.id));

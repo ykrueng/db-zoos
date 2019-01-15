@@ -16,7 +16,15 @@ module.exports = {
     return db("zoos").insert(zoo);
   },
 
-  remove: function (id) {
-    return db("zoos").where("id", id).del();
+  update: function(id, zoo) {
+    return db("zoos")
+      .where("id", id)
+      .update(zoo);
+  },
+
+  remove: function(id) {
+    return db("zoos")
+      .where("id", id)
+      .del();
   }
 };
